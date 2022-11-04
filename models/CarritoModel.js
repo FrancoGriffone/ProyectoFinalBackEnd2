@@ -1,4 +1,5 @@
 import mongoose, { mongo } from "mongoose";
+import ProductoModel from "./ProductoModel.js";
 
 const carritoSchema = new mongoose.Schema({
     productos: Array,

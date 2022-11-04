@@ -26,13 +26,7 @@ export default class Carrito {
         try {
             await this.mongodb(this.url)
             const producto = await this.producto.listar(idProd);
-            /*const carr = CarritoModel(idCarrito)
-            carr.forEach((carro) =>{
-            carro.id == idCarrito ? carro.productos.push(producto) : null;
-            });*/
-            console.log(producto)
-            return await CarritoModel.findByIdAndUpdate(idCarrito, producto)
-            //return this.carritos;
+            return await CarritoModel.findByIdAndUpdate({_id: idCarrito}, {$push:{productos:producto}});
         } catch(e){
             console.log(e)
         }
@@ -63,10 +57,8 @@ export default class Carrito {
         try {
             await this.mongodb(this.url)
             const producto = await this.producto.listar(id);
-            this.carritos.forEach((carro) =>{
-                carro.id == carr ? carro.productos.splice(producto) : null;
-            });
-            return this.carritos;
+            return await CarritoModel.findByIdAndUpdate({_id: carr}, {$unset:{productos:producto}});
+
         } catch(e){
             console.log(e)
         }

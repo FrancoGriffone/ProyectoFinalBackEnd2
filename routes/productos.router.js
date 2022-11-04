@@ -22,18 +22,18 @@ router.get("/:id", async (req, res) =>{
     res.send(productoBuscado)
 });
 
-router.post("/", validarAdmin, async (req, res) => {
+router.post("/crearproducto", validarAdmin, async (req, res) => {
     console.log(req.body);
     const response = await producto.guardar(req.body)
     res.send(response);
 });
 
-router.put("/:id", validarAdmin, async (req, res) => {
+router.put("/actualizarproducto/:id", validarAdmin, async (req, res) => {
     const productoActualizado = await producto.actualizar(req.params.id, req.body);
     res.send(productoActualizado)
 });
 
-router.delete("/:id", validarAdmin, async (req, res) => {
+router.delete("/borrarproducto/:id", validarAdmin, async (req, res) => {
     const productoBorrado = await producto.borrar(req.params.id);
     res.send(productoBorrado);
 });
